@@ -1,0 +1,18 @@
+/* Stili per la dashboard dell'admin */
+.container {
+    padding: 20px;
+  }
+  
+  .table {
+    margin-top: 20px;
+  }
+  
+  .table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f9f9f9;
+  }
+  
+  .input-group {
+    max-width: 600px;
+    margin: auto;
+  }
+  

@@ -1,0 +1,81 @@
+<!-- src/app/booking/booking.component.html -->
+
+<div class="container mt-5">
+  <!-- Sezione per visualizzare le prenotazioni effettuate -->
+  <div class="row justify-content-center mb-5">
+    <div class="col-md-10 col-lg-8">
+      <div class="card">
+        <div class="card-header text-center bg-primary text-white">
+          <h4>My Reservations</h4>
+        </div>
+        <div class="card-body">
+          <div *ngIf="reservations.length === 0" class="text-center">
+            <p>You have no reservations.</p>
+          </div>
+          <div *ngIf="reservations.length > 0">
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Details</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let reservation of reservations">
+                    <td>{{ reservation.date | date:'shortDate' }}</td>
+                    <td>{{ reservation.timeSlot }}</td>
+                    <td>{{ reservation.details }}</td>
+                    <td>
+                      <span class="badge" [ngClass]="{
+                        'bg-success': reservation.status === 'accepted',
+                        'bg-danger': reservation.status === 'rejected',
+                        'bg-warning': reservation.status === 'pending'
+                      }">
+                        {{ reservation.status | titlecase }}
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sezione per effettuare una nuova prenotazione -->
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <div class="card">
+        <div class="card-header text-center bg-success text-white">
+          <h4>Book a Reservation</h4>
+        </div>
+        <div class="card-body">
+          <form (ngSubmit)="onBook()">
+            <!-- Campo per la data -->
+            <div class="form-group mb-3">
+              <label for="date">Date</label>
+              <input type="date" id="date" class="form-control" [(ngModel)]="bookingData.date" name="date" required>
+            </div>
+            <!-- Campo per l'orario -->
+            <div class="form-group mb-3">
+              <label for="time">Time</label>
+              <input type="time" id="time" class="form-control" [(ngModel)]="bookingData.timeSlot" name="time" required>
+            </div>
+            <!-- Campo per dettagli (opzionale) -->
+            <div class="form-group mb-3">
+              <label for="details">Details</label>
+              <textarea id="details" class="form-control" [(ngModel)]="bookingData.details" name="details" rows="4"></textarea>
+            </div>
+            <!-- Pulsante di invio -->
+            <button type="submit" class="btn btn-primary w-100">Book</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

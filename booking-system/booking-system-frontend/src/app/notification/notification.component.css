@@ -1,0 +1,20 @@
+.notification {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 10px;
+    color: white;
+    text-align: center;
+    z-index: 1000;
+    transition: opacity 0.5s ease-in-out;
+  }
+  
+  .notification-success {
+    background-color: #28a745; /* Verde */
+  }
+  
+  .notification-error {
+    background-color: #dc3545; /* Rosso */
+  }
+  

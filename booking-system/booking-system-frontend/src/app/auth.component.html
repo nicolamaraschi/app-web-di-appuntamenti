@@ -1,0 +1,10 @@
+<!-- auth.component.html -->
+<div *ngIf="showLoginForm">
+  <app-login (showRegistration)="onShowRegistration()" (showBooking)="onShowBooking()"></app-login>
+</div>
+<div *ngIf="!showLoginForm && !showBooking">
+  <app-register (showLogin)="onShowLogin()"></app-register>
+</div>
+<div *ngIf="showBooking">
+  <app-booking></app-booking>
+</div>

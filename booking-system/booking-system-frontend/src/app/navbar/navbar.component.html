@@ -1,0 +1,22 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">MyApp</a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ms-auto">
+      <li *ngIf="!isLoggedIn" class="nav-item">
+        <a class="nav-link" href="#" (click)="onShowLogin(); $event.preventDefault();">Login</a>
+      </li>
+      <li *ngIf="!isLoggedIn" class="nav-item">
+        <a class="nav-link" href="#" (click)="onShowRegistration(); $event.preventDefault();">Registrati</a>
+      </li>
+      <li *ngIf="isLoggedIn" class="nav-item">
+        <a class="nav-link" href="#" (click)="onShowBooking(); $event.preventDefault();">Prenotazioni</a>
+      </li>
+      <li *ngIf="isLoggedIn" class="nav-item">
+        <a class="nav-link" href="#" (click)="logout(); $event.preventDefault();">Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>

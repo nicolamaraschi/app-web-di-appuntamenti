@@ -1,0 +1,126 @@
+<div class="container mt-4">
+    <h2 class="mb-4">Admin Dashboard</h2>
+  
+    <!-- Error message -->
+    <div *ngIf="errorMessage" class="alert alert-danger">
+      {{ errorMessage }}
+    </div>
+  
+    <!-- All Reservations Section -->
+    <section class="mb-5">
+      <h3>All Reservations</h3>
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>User</th>
+            <th>Date</th>
+            <th>Time Slot</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let reservation of reservations">
+            <td>{{ reservation._id }}</td>
+            <td *ngIf="reservation.userId">{{ reservation.userId.username }} ({{ reservation.userId.email }})</td>
+            <td *ngIf="!reservation.userId">N/A</td>
+            <td>{{ reservation.date | date: 'short' }}</td>
+            <td>{{ reservation.timeSlot }}</td>
+            <td>{{ reservation.status }}</td>
+            <td>
+              <!-- Pulsanti per cambiare lo stato della prenotazione -->
+              <button class="btn btn-success btn-sm" *ngIf="reservation.status === 'pending'" (click)="updateStatus(reservation._id, 'accepted')">Accept</button>
+              <button class="btn btn-danger btn-sm" *ngIf="reservation.status === 'pending'" (click)="updateStatus(reservation._id, 'rejected')">Reject</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  
+    <!-- User Reservations Section -->
+    <section class="mb-5">
+      <h3>User Reservations</h3>
+      <input type="text" [(ngModel)]="userId" placeholder="Enter User ID" class="form-control mb-3">
+      <button class="btn btn-primary" (click)="loadUserReservations()">Load User Reservations</button>
+      <table class="table table-bordered table-striped mt-3">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>User</th>
+            <th>Date</th>
+            <th>Time Slot</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let reservation of userReservations">
+            <td>{{ reservation._id }}</td>
+            <td *ngIf="reservation.userId">{{ reservation.userId.username }} ({{ reservation.userId.email }})</td>
+            <td *ngIf="!reservation.userId">N/A</td>
+            <td>{{ reservation.date | date: 'short' }}</td>
+            <td>{{ reservation.timeSlot }}</td>
+            <td>{{ reservation.status }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  
+    <!-- Date Reservations Section -->
+    <section class="mb-5">
+      <h3>Date Reservations</h3>
+      <input type="date" [(ngModel)]="date" class="form-control mb-3">
+      <button class="btn btn-primary" (click)="loadDateReservations()">Load Reservations for Date</button>
+      <table class="table table-bordered table-striped mt-3">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>User</th>
+            <th>Date</th>
+            <th>Time Slot</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let reservation of dateReservations">
+            <td>{{ reservation._id }}</td>
+            <td *ngIf="reservation.userId">{{ reservation.userId.username }} ({{ reservation.userId.email }})</td>
+            <td *ngIf="!reservation.userId">N/A</td>
+            <td>{{ reservation.date | date: 'short' }}</td>
+            <td>{{ reservation.timeSlot }}</td>
+            <td>{{ reservation.status }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  
+    <!-- Date Range Reservations Section -->
+    <section class="mb-5">
+      <h3>Date Range Reservations</h3>
+      <input type="date" [(ngModel)]="startDate" class="form-control mb-2" placeholder="Start Date">
+      <input type="date" [(ngModel)]="endDate" class="form-control mb-3" placeholder="End Date">
+      <button class="btn btn-primary" (click)="loadRangeReservations()">Load Reservations for Date Range</button>
+      <table class="table table-bordered table-striped mt-3">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>User</th>
+            <th>Date</th>
+            <th>Time Slot</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let reservation of rangeReservations">
+            <td>{{ reservation._id }}</td>
+            <td *ngIf="reservation.userId">{{ reservation.userId.username }} ({{ reservation.userId.email }})</td>
+            <td *ngIf="!reservation.userId">N/A</td>
+            <td>{{ reservation.date | date: 'short' }}</td>
+            <td>{{ reservation.timeSlot }}</td>
+            <td>{{ reservation.status }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+  
